@@ -1,0 +1,87 @@
+body {
+	background-color: rgb(51, 51, 51);
+}
+
+.container {
+	display: none;
+	flex-direction: row;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	margin: 0px 50px 50px 50px;
+	background-color: rgb(82, 82, 82);
+	padding: 35px;
+	border-radius: 15px;
+}
+
+.card {
+	flex: 0 0 20%;
+	height: 400px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 15px;
+	background-color: rgb(242, 242, 242);
+	margin: 10px 30px;
+}
+
+.pokemon-title {
+	color: rgb(242, 242, 242);
+	text-align: center;
+	margin-bottom: 15px;
+	font-size: 35px;
+}
+
+.pokemon-output {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+input {
+	margin: 10px 0px;
+	padding: 5px;
+	border-radius: 5px;
+	border: none;
+	outline: none;
+	height: 25px;
+}
+
+button {
+	margin: 10px 10px;
+	border-radius: 5px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	height: 35px;
+	padding: 10px;
+	font-size: 15px;
+	font-weight: 700;
+}
+
+button:hover {
+	background-color: rgb(50, 161, 60);
+	color: rgb(249, 249, 249);
+}
+
+.active {
+	display: flex;
+}
+
+.remove-button:hover {
+	background-color: rgb(246, 54, 54);
+	color: rgb(242, 242, 242);
+}
+
+.dropdown-button:hover {
+	background-color: rgb(50, 144, 161);
+	color: rgb(249, 249, 249);
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
