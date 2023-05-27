@@ -2,6 +2,7 @@ const form = document.querySelector('#add-pokemon');
 const addField = document.querySelector('#add-field');
 const addName = document.querySelector('#add-name');
 const pokemonOutput = document.querySelector('#pokemon-output');
+const randomButton = document.querySelector('#randomize');
 
 const pokemonList = loadLocalStorage();
 
@@ -11,6 +12,27 @@ if (pokemonList.length > 1) {
 	renderPokemonList();
 }
 
+// function fillDex() {
+// 	for (let i = 1; i <= 420; i++) {
+// 		pokemonList.push(new Pokemon(i, i));
+// 	}
+// 	renderPokemonList();
+// 	saveLocalStorage();
+// }
+
+function randomPokemonFusion() {
+	let randomPokemon1 = Math.floor(Math.random() * 420);
+	let randomPokemon2 = Math.floor(Math.random() * 420);
+	pokemonList.push(new Pokemon(randomPokemon1, randomPokemon1));
+	pokemonList.push(new Pokemon(randomPokemon2, randomPokemon2));
+	pokemonOutput.innerHTML = '';
+}
+
+randomButton.addEventListener('click', () => {
+	randomPokemonFusion();
+	renderPokemonList();
+});
+
 class Pokemon {
 	constructor(name, id) {
 		this.name = name;
@@ -18,6 +40,14 @@ class Pokemon {
 	}
 
 	remove = () => {
+		const regexPattern = new RegExp(`^${this.id}-`);
+		const keysToDelete = Object.keys(cache).filter((key) =>
+			regexPattern.test(key)
+		);
+		keysToDelete.forEach((key) => {
+			delete cache[key];
+			console.log(`Removed '${key}' from cache.`);
+		});
 		pokemonList.splice(pokemonList.indexOf(this), 1);
 		saveLocalStorage();
 		renderPokemonList();
@@ -194,6 +224,7 @@ function createRemoveButton(pokemon) {
 	removeButton.classList.add('remove-button');
 	removeButton.addEventListener('click', () => {
 		pokemon.remove();
+		saveLocalStorage();
 	});
 	return removeButton;
 }
@@ -228,3 +259,7 @@ function createPokemonCard(fusion, pokemon1, pokemon2) {
 	card.appendChild(img);
 	return card;
 }
+
+// fillDex();
+
+//history functionality store previous 10 searches
