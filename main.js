@@ -5,6 +5,8 @@ const pokemonOutput = document.querySelector('#pokemon-output');
 
 const pokemonList = loadLocalStorage();
 
+const cache = loadCache();
+
 if (pokemonList.length > 1) {
 	renderPokemonList();
 }
@@ -23,6 +25,13 @@ class Pokemon {
 }
 
 async function findFusion(pokemon1, pokemon2) {
+	const cacheKey = `${pokemon1}-${pokemon2}`;
+
+	if (cache[cacheKey]) {
+		console.log('Cache hit');
+		return cache[cacheKey];
+	}
+
 	const imgList = [];
 	const urlBase = `./CustomBattlers/indexed/${pokemon1}`;
 	const extensions = [
@@ -74,6 +83,8 @@ async function findFusion(pokemon1, pokemon2) {
 		}
 	}
 
+	cache[cacheKey] = imgList;
+
 	return imgList;
 }
 
@@ -100,6 +111,7 @@ function saveLocalStorage() {
 		});
 	});
 	localStorage.setItem('pokemonList', JSON.stringify(storedList));
+	localStorage.setItem('cache', JSON.stringify(cache));
 }
 
 function loadLocalStorage() {
@@ -113,6 +125,15 @@ function loadLocalStorage() {
 		return pokemonList;
 	} else {
 		return [];
+	}
+}
+
+function loadCache() {
+	const cache = JSON.parse(localStorage.getItem('cache'));
+	if (cache !== null) {
+		return cache;
+	} else {
+		return {};
 	}
 }
 
